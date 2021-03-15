@@ -5,7 +5,15 @@ const products = [];
 const router = express.Router();
 
 router.get('/add-product', (req, res) => {
-  res.render('add-product', { pageTitle: 'Add Product', path: '/admin/add-product' });
+  res.render(
+    'add-product',
+    {
+      pageTitle: 'Add Product',
+      path: '/admin/add-product',
+      activeForm: true,
+      formsCSS: true,
+    },
+  );
 });
 
 router.post('/add-product', (req, res) => {
