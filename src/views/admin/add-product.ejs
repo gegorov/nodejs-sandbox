@@ -1,11 +1,11 @@
-<%- include('../includes/header.ejs') %>
+<%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/forms.css">
 <link rel="stylesheet" href="/css/product.css">
-
 </head>
 
 <body>
     <%- include('../includes/navigation.ejs') %>
+
     <main>
         <form class="product-form" action="/admin/add-product" method="POST">
             <div class="form-control">
@@ -13,7 +13,7 @@
                 <input type="text" name="title" id="title">
             </div>
             <div class="form-control">
-                <label for="imageUrl">Image Url</label>
+                <label for="imageUrl">Image URL</label>
                 <input type="text" name="imageUrl" id="imageUrl">
             </div>
             <div class="form-control">
@@ -25,8 +25,7 @@
                 <textarea name="description" id="description" rows="5"></textarea>
             </div>
 
-
             <button class="btn" type="submit">Add Product</button>
         </form>
     </main>
-    <%- include('../includes/footer.ejs') %>
+    <%- include('../includes/end.ejs') %>

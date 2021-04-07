@@ -24,6 +24,7 @@ module.exports = class Product {
   }
 
   save() {
+    this.id = Date.now().toString();
     getProductsFromFile((products) => {
       const newProducts = products.slice();
       newProducts.push(this);
@@ -37,5 +38,17 @@ module.exports = class Product {
 
   static fetchAll(cb) {
     getProductsFromFile(cb);
+  }
+
+  static findById(id, cb) {
+    getProductsFromFile((products) => {
+      const product = products.find((p) => {
+        console.log('get products', p.id === id, id, p.id);
+        console.log('id typoef', typeof id);
+        console.log('p.id typoef', typeof p.id);
+        return p.id === id;
+      });
+      cb(product);
+    });
   }
 };

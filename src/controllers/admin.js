@@ -13,7 +13,7 @@ exports.getAddProduct = (req, res) => {
 exports.getProducts = (req, res) => {
   Product.fetchAll((products) => {
     res.render('admin/products', {
-      products,
+      prods: products,
       pageTitle: 'Products',
       path: '/admin/products',
     });
