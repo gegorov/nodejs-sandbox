@@ -16,7 +16,8 @@ const getProductsFromFile = (cb) => {
 };
 
 module.exports = class Product {
-  constructor(title, imageUrl, description, price) {
+  constructor(id, title, imageUrl, description, price) {
+    this.id = id;
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
@@ -24,15 +25,26 @@ module.exports = class Product {
   }
 
   save() {
-    this.id = Date.now().toString();
     getProductsFromFile((products) => {
-      const newProducts = products.slice();
-      newProducts.push(this);
-      fs.writeFile(FILE_PATH, JSON.stringify(newProducts), (e) => {
-        if (e) {
-          console.log('save was not succesefull :(', e);
-        }
-      });
+      if (this.id) {
+        const existingProductIndex = products.findIndex((prod) => prod.id === this.id);
+        const updatedProducts = [...products];
+        updatedProducts[existingProductIndex] = this;
+        fs.writeFile(FILE_PATH, JSON.stringify(updatedProducts), (e) => {
+          if (e) {
+            console.log('product update was not succesefull :(', e);
+          }
+        });
+      } else {
+        this.id = Date.now().toString();
+        const newProducts = products.slice();
+        newProducts.push(this);
+        fs.writeFile(FILE_PATH, JSON.stringify(newProducts), (e) => {
+          if (e) {
+            console.log('save was not succesefull :(', e);
+          }
+        });
+      }
     });
   }
 
